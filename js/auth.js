@@ -12,48 +12,48 @@ class AuthSystem {
     }
 
     setupEventListeners() {
-        // Login form handler
-        const loginForm = document.getElementById('loginForm');
-        if (loginForm) {
-            loginForm.addEventListener('submit', (e) => this.handleLogin(e));
-        }
-
-        // Register form handler
-        const registerForm = document.getElementById('registerForm');
-        if (registerForm) {
-            registerForm.addEventListener('submit', (e) => this.handleRegister(e));
-        }
+    // Login form handler
+    const loginForm = document.getElementById('loginForm');  // ← TAMBAHIN 'loginForm'
+    if (loginForm) {
+        loginForm.addEventListener('submit', (e) => this.handleLogin(e));  // ← TAMBAHIN (e) => 
     }
+
+    // Register form handler  
+    const registerForm = document.getElementById('registerForm');  // ← TAMBAHIN 'registerForm'
+    if (registerForm) {
+        registerForm.addEventListener('submit', (e) => this.handleRegister(e));  // ← TAMBAHIN (e) =>
+    }
+}
 
     handleLogin(e) {
-        e.preventDefault();
-        
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
+    e.preventDefault();
+    
+    const email = document.getElementById('email').value;  // ← TAMBAHIN .value
+    const password = document.getElementById('password').value;  // ← TAMBAHIN .value
 
-        if (!this.validateLogin(email, password)) {
-            return;
-        }
-
-        // Simulate login process
-        this.loginUser(email, password);
+    if (!this.validateLogin(email, password)) {
+        return;
     }
 
-    handleRegister(e) {
-        e.preventDefault();
-        
-        const fullName = document.getElementById('fullName').value;
-        const email = document.getElementById('email').value;
-        const password = document.getElementById('password').value;
-        const confirmPassword = document.getElementById('confirmPassword').value;
+    // Simulate login process
+    this.loginUser(email, password);
+}
 
-        if (!this.validateRegister(fullName, email, password, confirmPassword)) {
-            return;
-        }
+handleRegister(e) {
+    e.preventDefault();
+    
+    const fullName = document.getElementById('fullName').value;  // ← TAMBAHIN .value
+    const email = document.getElementById('email').value;  // ← TAMBAHIN .value
+    const password = document.getElementById('password').value;  // ← TAMBAHIN .value
+    const confirmPassword = document.getElementById('confirmPassword').value;  // ← TAMBAHIN .value
 
-        // Simulate registration process
-        this.registerUser(fullName, email, password);
+    if (!this.validateRegister(fullName, email, password, confirmPassword)) {
+        return;
     }
+
+    // Simulate registration process  
+    this.registerUser(fullName, email, password);
+}
 
     validateLogin(email, password) {
         if (!email || !password) {
