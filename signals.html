@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>AI Signals - TradingJournal Pro</title>
+    <link rel="stylesheet" href="css/signals.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <h2>🤖 AI Signals</h2>
+        </div>
+        <div class="nav-links">
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="signals.html" class="nav-link active">Signals</a>
+            <a href="journal.html" class="nav-link">Journal</a>
+            <a href="backtest.html" class="nav-link">Backtest</a>
+        </div>
+        <div class="nav-user">
+            <span id="userWelcome">Welcome, Trader</span>
+            <button id="logoutBtn" class="logout-btn">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Signals Container -->
+    <div class="signals-container">
+        <!-- Signals Controls -->
+        <div class="signals-header">
+            <h1>AI Trading Signals</h1>
+            <div class="controls">
+                <button id="scanBtn" class="scan-btn">
+                    🔍 Scan Markets
+                </button>
+                <button id="autoScanBtn" class="auto-scan-btn">
+                    ⚡ Auto Scan
+                </button>
+                <select id="timeframeFilter">
+                    <option value="5m">5 Minutes</option>
+                    <option value="15m">15 Minutes</option>
+                    <option value="1h">1 Hour</option>
+                    <option value="4h" selected>4 Hours</option>
+                    <option value="1d">1 Day</option>
+                </select>
+            </div>
+        </div>
+
+        <!-- Live Signals Grid -->
+        <div class="signals-grid" id="signalsGrid">
+            <!-- Signals will be loaded here dynamically -->
+        </div>
+
+        <!-- Signal Details Modal -->
+        <div id="signalModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <h3>Signal Details</h3>
+                <div id="signalDetails">
+                    <!-- Signal details will be loaded here -->
+                </div>
+                <button id="executeTradeBtn" class="execute-btn">
+                    🚀 Execute Trade
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/data-manager.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/bot-scanner.js"></script>
+    <script src="js/signals.js"></script>
+</body>
+</html>
