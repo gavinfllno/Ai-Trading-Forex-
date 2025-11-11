@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>TradingJournal Pro - AI Powered Signals</title>
+    <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <h2>📊 TradingJournal Pro</h2>
+        </div>
+        <div class="nav-links">
+            <a href="index.html" class="nav-link active">Home</a>
+            <a href="login.html" class="nav-link">Login</a>
+            <a href="about.html" class="nav-link">About</a>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">AI Trading Signals + Journal System</h1>
+            <p class="hero-subtitle">Real-time market analysis dengan trading journal untuk backtest dan performance tracking</p>
+            
+            <div class="hero-stats">
+                <div class="stat">
+                    <div class="stat-number" id="liveSignals">0</div>
+                    <div class="stat-label">Live Signals</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="winRate">0%</div>
+                    <div class="stat-label">Win Rate</div>
+                </div>
+                <div class="stat">
+                    <div class="stat-number" id="activeUsers">1,234+</div>
+                    <div class="stat-label">Traders</div>
+                </div>
+            </div>
+
+            <div class="hero-features">
+                <div class="feature-card">
+                    <div class="feature-icon">🤖</div>
+                    <h3>AI Bot Scanner</h3>
+                    <p>Multiple strategy real-time market scanning</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">📊</div>
+                    <h3>Trading Journal</h3>
+                    <p>Complete history untuk backtest & analysis</p>
+                </div>
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>Performance Analytics</h3>
+                    <p>Detailed win rate, profit factor, dan metrics</p>
+                </div>
+            </div>
+
+            <div class="hero-actions">
+                <a href="login.html" class="btn btn-primary">Start Trading</a>
+                <a href="#demo" class="btn btn-secondary">Live Demo</a>
+            </div>
+        </div>
+    </section>
+
+    <!-- Live Demo Section -->
+    <section id="demo" class="demo-section">
+        <h2>Live Signal Preview</h2>
+        <div class="demo-container">
+            <div class="signal-preview">
+                <div class="signal-card buy">
+                    <div class="signal-header">
+                        <span class="signal-pair">XAU/USD</span>
+                        <span class="signal-action">BUY</span>
+                    </div>
+                    <div class="signal-price">$1,950.25</div>
+                    <div class="signal-meta">
+                        <span>EMA Crossover</span>
+                        <span>85% Confidence</span>
+                    </div>
+                </div>
+                <div class="signal-card sell">
+                    <div class="signal-header">
+                        <span class="signal-pair">EUR/USD</span>
+                        <span class="signal-action">SELL</span>
+                    </div>
+                    <div class="signal-price">1.0950</div>
+                    <div class="signal-meta">
+                        <span>RSI Divergence</span>
+                        <span>78% Confidence</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <script src="js/utils.js"></script>
+    <script>
+        // Dynamic stats counter
+        function animateStats() {
+            animateValue('liveSignals', 0, 47, 2000);
+            animateValue('winRate', 0, 76, 2500);
+        }
+
+        function animateValue(id, start, end, duration) {
+            const element = document.getElementById(id);
+            let startTimestamp = null;
+            const step = (timestamp) => {
+                if (!startTimestamp) startTimestamp = timestamp;
+                const progress = Math.min((timestamp - startTimestamp) / duration, 1);
+                const value = Math.floor(progress * (end - start) + start);
+                element.textContent = id === 'winRate' ? value + '%' : value;
+                if (progress < 1) {
+                    window.requestAnimationFrame(step);
+                }
+            };
+            window.requestAnimationFrame(step);
+        }
+
+        // Initialize when page loads
+        document.addEventListener('DOMContentLoaded', animateStats);
+    </script>
+</body>
+</html>
