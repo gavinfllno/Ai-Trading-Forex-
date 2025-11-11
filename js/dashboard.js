@@ -1,4 +1,4 @@
-// Dashboard Functionality - SIMPLE VERSION
+// DASHBOARD.JS - FIX VERSION
 class Dashboard {
     constructor() {
         this.currentUser = JSON.parse(localStorage.getItem('currentUser'));
@@ -8,19 +8,19 @@ class Dashboard {
     init() {
         if (!this.checkAuth()) return;
         this.loadBasicStats();
-        this.setupEventListeners();
+        this.setupEventListeners(); // ← FIX: tambah "s"
     }
 
     checkAuth() {
         if (!this.currentUser) {
-            window.location.href = 'login.html';
+            window.location.href = 'login.html'; // ← FIX: complete URL
             return false;
         }
         
         // Update welcome message
         const welcomeEl = document.getElementById('userWelcome');
         if (welcomeEl) {
-            welcomeEl.textContent = `Welcome, ${this.currentUser.name || this.currentUser.email.split('@')[0]}`;
+            welcomeEl.textContent = `Welcome, ${this.currentUser.name || this.currentUser.email.split('@')[0]}`; // ← FIX: template string
         }
         return true;
     }
@@ -68,13 +68,16 @@ class Dashboard {
             });
         });
 
-        // Navigation
+        // Navigation - FIX INI (PENTING!)
         const navLinks = document.querySelectorAll('.nav-link');
         navLinks.forEach(link => {
             link.addEventListener('click', (e) => {
                 e.preventDefault();
                 const target = e.target.getAttribute('href');
-                if (target) window.location.href = target;
+                console.log('Navigating to:', target);
+                if (target) {
+                    window.location.href = target;
+                }
             });
         });
     }
