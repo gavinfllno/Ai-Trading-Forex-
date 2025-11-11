@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - TradingJournal Pro</title>
+    <link rel="stylesheet" href="css/dashboard.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <h2>📊 TradingJournal Pro</h2>
+        </div>
+        <div class="nav-links">
+            <a href="dashboard.html" class="nav-link active">Dashboard</a>
+            <a href="signals.html" class="nav-link">Signals</a>
+            <a href="journal.html" class="nav-link">Journal</a>
+            <a href="backtest.html" class="nav-link">Backtest</a>
+        </div>
+        <div class="nav-user">
+            <span id="userWelcome">Welcome, Trader</span>
+            <button id="logoutBtn" class="logout-btn">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Main Dashboard -->
+    <div class="dashboard-container">
+        <!-- Stats Overview -->
+        <div class="stats-grid">
+            <div class="stat-card">
+                <div class="stat-icon">📈</div>
+                <div class="stat-info">
+                    <h3 id="totalTrades">0</h3>
+                    <p>Total Trades</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">💰</div>
+                <div class="stat-info">
+                    <h3 id="totalProfit">$0.00</h3>
+                    <p>Total Profit</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">🎯</div>
+                <div class="stat-info">
+                    <h3 id="winRate">0%</h3>
+                    <p>Win Rate</p>
+                </div>
+            </div>
+            <div class="stat-card">
+                <div class="stat-icon">⚡</div>
+                <div class="stat-info">
+                    <h3 id="activeSignals">0</h3>
+                    <p>Active Signals</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Quick Actions & Recent Activity -->
+        <div class="content-grid">
+            <!-- Quick Actions -->
+            <div class="quick-actions">
+                <h3>Quick Actions</h3>
+                <div class="action-buttons">
+                    <button class="action-btn" onclick="location.href='journal.html?action=add'">
+                        ➕ Add Trade
+                    </button>
+                    <button class="action-btn" onclick="location.href='signals.html'">
+                        🤖 View Signals
+                    </button>
+                    <button class="action-btn" onclick="location.href='backtest.html'">
+                        🔄 Run Backtest
+                    </button>
+                    <button class="action-btn" onclick="showAddTradeModal()">
+                        📝 Quick Journal
+                    </button>
+                </div>
+            </div>
+
+            <!-- Recent Trades -->
+            <div class="recent-trades">
+                <h3>Recent Trades</h3>
+                <div id="recentTradesList" class="trades-list">
+                    <!-- Trades will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Live Signals -->
+            <div class="live-signals">
+                <h3>Live Signals</h3>
+                <div id="signalsList" class="signals-list">
+                    <!-- Signals will be loaded here -->
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Quick Trade Modal -->
+    <div id="tradeModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <h3>Quick Trade Entry</h3>
+            <form id="quickTradeForm">
+                <div class="form-group">
+                    <label>Currency Pair</label>
+                    <select id="currencyPair" required>
+                        <option value="EUR/USD">EUR/USD</option>
+                        <option value="GBP/USD">GBP/USD</option>
+                        <option value="USD/JPY">USD/JPY</option>
+                        <option value="AUD/USD">AUD/USD</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Direction</label>
+                    <select id="tradeDirection" required>
+                        <option value="BUY">BUY</option>
+                        <option value="SELL">SELL</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label>Entry Price</label>
+                    <input type="number" id="entryPrice" step="0.00001" required>
+                </div>
+                <div class="form-group">
+                    <label>Quantity</label>
+                    <input type="number" id="tradeQuantity" value="1" required>
+                </div>
+                <button type="submit" class="submit-btn">Add Trade</button>
+            </form>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/data-manager.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/dashboard.js"></script>
+</body>
+</html>
