@@ -1,0 +1,181 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backtest - TradingJournal Pro</title>
+    <link rel="stylesheet" href="css/backtest.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="navbar">
+        <div class="nav-brand">
+            <h2>🔄 Backtest</h2>
+        </div>
+        <div class="nav-links">
+            <a href="dashboard.html" class="nav-link">Dashboard</a>
+            <a href="signals.html" class="nav-link">Signals</a>
+            <a href="journal.html" class="nav-link">Journal</a>
+            <a href="backtest.html" class="nav-link active">Backtest</a>
+        </div>
+        <div class="nav-user">
+            <span id="userWelcome">Welcome, Trader</span>
+            <button id="logoutBtn" class="logout-btn">Logout</button>
+        </div>
+    </nav>
+
+    <!-- Backtest Container -->
+    <div class="backtest-container">
+        <!-- Configuration Panel -->
+        <div class="config-panel">
+            <h2>Backtest Configuration</h2>
+            
+            <div class="config-grid">
+                <div class="config-group">
+                    <label for="strategySelect">Trading Strategy</label>
+                    <select id="strategySelect">
+                        <option value="moving_average">Moving Average Crossover</option>
+                        <option value="rsi">RSI Overbought/Oversold</option>
+                        <option value="bollinger">Bollinger Bands</option>
+                        <option value="macd">MACD Crossover</option>
+                        <option value="custom">Custom Strategy</option>
+                    </select>
+                </div>
+
+                <div class="config-group">
+                    <label for="currencyPair">Currency Pair</label>
+                    <select id="currencyPair">
+                        <option value="EUR/USD">EUR/USD</option>
+                        <option value="GBP/USD">GBP/USD</option>
+                        <option value="USD/JPY">USD/JPY</option>
+                        <option value="AUD/USD">AUD/USD</option>
+                    </select>
+                </div>
+
+                <div class="config-group">
+                    <label for="timeframe">Timeframe</label>
+                    <select id="timeframe">
+                        <option value="5m">5 Minutes</option>
+                        <option value="15m">15 Minutes</option>
+                        <option value="1h">1 Hour</option>
+                        <option value="4h" selected>4 Hours</option>
+                        <option value="1d">1 Day</option>
+                    </select>
+                </div>
+
+                <div class="config-group">
+                    <label for="period">Test Period (Days)</label>
+                    <input type="number" id="period" value="30" min="1" max="365">
+                </div>
+            </div>
+
+            <!-- Strategy Parameters -->
+            <div class="strategy-params" id="strategyParams">
+                <!-- Parameters will be loaded dynamically based on strategy -->
+            </div>
+
+            <!-- Risk Management -->
+            <div class="risk-management">
+                <h3>Risk Management</h3>
+                <div class="risk-grid">
+                    <div class="config-group">
+                        <label for="initialCapital">Initial Capital ($)</label>
+                        <input type="number" id="initialCapital" value="10000" min="100">
+                    </div>
+                    <div class="config-group">
+                        <label for="riskPerTrade">Risk per Trade (%)</label>
+                        <input type="number" id="riskPerTrade" value="2" min="0.1" max="10" step="0.1">
+                    </div>
+                    <div class="config-group">
+                        <label for="stopLossPips">Stop Loss (Pips)</label>
+                        <input type="number" id="stopLossPips" value="20" min="5" max="100">
+                    </div>
+                    <div class="config-group">
+                        <label for="takeProfitPips">Take Profit (Pips)</label>
+                        <input type="number" id="takeProfitPips" value="40" min="10" max="200">
+                    </div>
+                </div>
+            </div>
+
+            <div class="action-buttons">
+                <button id="runBacktest" class="run-btn">🚀 Run Backtest</button>
+                <button id="resetConfig" class="reset-btn">🔄 Reset</button>
+            </div>
+        </div>
+
+        <!-- Results Panel -->
+        <div class="results-panel">
+            <div class="results-header">
+                <h2>Backtest Results</h2>
+                <div class="results-actions">
+                    <button id="exportResults" class="export-btn">📊 Export Results</button>
+                    <button id="saveStrategy" class="save-btn">💾 Save Strategy</button>
+                </div>
+            </div>
+
+            <!-- Performance Summary -->
+            <div class="performance-summary" id="performanceSummary">
+                <div class="summary-placeholder">
+                    <p>Configure and run backtest to see results</p>
+                </div>
+            </div>
+
+            <!-- Charts and Analytics -->
+            <div class="analytics-grid">
+                <div class="chart-container">
+                    <h3>Equity Curve</h3>
+                    <div id="equityChart" class="chart-placeholder">
+                        <p>Equity curve will be displayed here</p>
+                    </div>
+                </div>
+
+                <div class="chart-container">
+                    <h3>Monthly Performance</h3>
+                    <div id="monthlyChart" class="chart-placeholder">
+                        <p>Monthly performance chart will be displayed here</p>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Trades Table -->
+            <div class="trades-results">
+                <h3>Simulated Trades</h3>
+                <div class="trades-table-container">
+                    <table class="trades-table" id="backtestTradesTable">
+                        <thead>
+                            <tr>
+                                <th>Date</th>
+                                <th>Pair</th>
+                                <th>Direction</th>
+                                <th>Entry</th>
+                                <th>Exit</th>
+                                <th>P&L</th>
+                                <th>R/R</th>
+                            </tr>
+                        </thead>
+                        <tbody id="backtestTradesBody">
+                            <!-- Simulated trades will be loaded here -->
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Loading Overlay -->
+    <div id="loadingOverlay" class="loading-overlay">
+        <div class="loading-content">
+            <div class="loading-spinner"></div>
+            <h3>Running Backtest...</h3>
+            <p id="loadingProgress">Initializing strategy...</p>
+        </div>
+    </div>
+
+    <script src="js/utils.js"></script>
+    <script src="js/data-manager.js"></script>
+    <script src="js/auth.js"></script>
+    <script src="js/trading-engine.js"></script>
+    <script src="js/backtest-engine.js"></script>
+    <script src="js/backtest.js"></script>
+</body>
+</html>
